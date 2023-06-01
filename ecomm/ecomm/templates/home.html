@@ -1,0 +1,408 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'carousel.html' %}
+
+<!--Main layout-->
+<main>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #2c801b">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#">Categories:</a>
+
+                <!-- Toggle button -->
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent2"
+                        aria-controls="navbarSupportedContent2"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <!-- Link -->
+                        <li class="nav-item acitve">
+                            <a class="nav-link text-white" href="#" onclick="items('all')">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="items('sayur')">Sayur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="items('buah')">Buah</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="items('dagingseafood')">Daging dan Seafood</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="#" onclick="items('telursusu')">Telur dan Olahan Susu</a>
+                      </li>
+
+                    </ul>
+
+                    <!-- Search -->
+                    <form class="w-auto py-1" style="max-width: 12rem">
+                        <input id="myInput" type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                    </form>
+
+                </div>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <!-- Products -->
+        <section id="all-items">
+            <div class="text-center">
+              <div class="row">
+                
+                {% for pItem in object_list %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ pItem.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ pItem.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            {% if pItem.label == 'NEW' %}
+                            <h5><span class="badge bg-primary ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'SALE' %}
+                            <h5><span class="badge bg-info ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'BEST' %}
+                            <h5><span class="badge bg-danger ms-2">{{ pItem.label }}</span></h5>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ pItem.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ pItem.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ pItem.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+                {% empty %}
+                  <p>Data Produk belum tersedia</p>
+                {% endfor %}
+
+              </div>
+            </div>
+          </section>
+          <section id="sayur">
+            <div class="text-center">
+              <div class="row">
+                
+                {% for pItem in object_list %}
+                {% if pItem.kategori == 'S' %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ pItem.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ pItem.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            {% if pItem.label == 'NEW' %}
+                            <h5><span class="badge bg-primary ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'SALE' %}
+                            <h5><span class="badge bg-info ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'BEST' %}
+                            <h5><span class="badge bg-danger ms-2">{{ pItem.label }}</span></h5>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ pItem.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ pItem.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ pItem.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                  <p>Data Produk belum tersedia</p>
+                {% endfor %}
+
+              </div>
+            </div>
+          </section>
+          <section id="buah">
+            <div class="text-center">
+              <div class="row">
+                
+                {% for pItem in object_list %}
+                {% if pItem.kategori == 'B' %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ pItem.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ pItem.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            {% if pItem.label == 'NEW' %}
+                            <h5><span class="badge bg-primary ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'SALE' %}
+                            <h5><span class="badge bg-info ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'BEST' %}
+                            <h5><span class="badge bg-danger ms-2">{{ pItem.label }}</span></h5>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ pItem.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ pItem.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ pItem.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                  <p>Data Produk belum tersedia</p>
+                {% endfor %}
+
+              </div>
+            </div>
+          </section>
+          <section id="dagingseafood">
+            <div class="text-center">
+              <div class="row">
+                
+                {% for pItem in object_list %}
+                {% if pItem.kategori == 'DS' %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ pItem.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ pItem.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            {% if pItem.label == 'NEW' %}
+                            <h5><span class="badge bg-primary ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'SALE' %}
+                            <h5><span class="badge bg-info ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'BEST' %}
+                            <h5><span class="badge bg-danger ms-2">{{ pItem.label }}</span></h5>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ pItem.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ pItem.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ pItem.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                  <p>Data Produk belum tersedia</p>
+                {% endfor %}
+
+              </div>
+            </div>
+          </section>
+          <section id="telursusu">
+            <div class="text-center">
+              <div class="row">
+                
+                {% for pItem in object_list %}
+                {% if pItem.kategori == 'TO' %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ pItem.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ pItem.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            {% if pItem.label == 'NEW' %}
+                            <h5><span class="badge bg-primary ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'SALE' %}
+                            <h5><span class="badge bg-info ms-2">{{ pItem.label }}</span></h5>
+                            {% elif pItem.label == 'BEST' %}
+                            <h5><span class="badge bg-danger ms-2">{{ pItem.label }}</span></h5>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ pItem.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ pItem.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ pItem.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                  <p>Data Produk belum tersedia</p>
+                {% endfor %}
+
+              </div>
+            </div>
+          </section>
+        <!-- End Products -->
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+            <ul class="pagination">
+                <li class="page-item">
+                  {% if page_obj.has_previous %}
+                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  {% endif %}
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+                <li class="page-item">
+                  {% if page_obj.has_next %}
+                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  {% endif %}
+                </li>
+            </ul>
+        </nav>
+        {% endif %}
+        <!-- Pagination -->
+        <script>
+          let allItems = document.getElementById("all-items")
+          let sayur = document.getElementById("sayur")
+          let buah = document.getElementById("buah")
+          let dagingseafood = document.getElementById("dagingseafood")
+          let telursusu = document.getElementById("telursusu")
+
+          allItems.style.display = "block"
+          sayur.style.display = "none"
+          buah.style.display = "none"
+          dagingseafood.style.display = "none"
+          telursusu.style.display = "none"
+
+          function items(item) {
+            if (item == 'all') {
+              allItems.style.display = "block"
+              sayur.style.display = "none"
+              buah.style.display = "none"
+              dagingseafood.style.display = "none"
+              telursusu.style.display = "none"
+            }
+            else if (item == 'sayur') {
+              allItems.style.display = "none"
+              sayur.style.display = "block"
+              buah.style.display = "none"
+              dagingseafood.style.display = "none"
+              telursusu.style.display = "none"
+            }
+            else if (item == 'buah') {
+              allItems.style.display = "none"
+              sayur.style.display = "none"
+              buah.style.display = "block"
+              dagingseafood.style.display = "none"
+              telursusu.style.display = "none"
+            }
+            else if (item == 'dagingseafood') {
+              allItems.style.display = "none"
+              sayur.style.display = "none"
+              buah.style.display = "none"
+              dagingseafood.style.display = "block"
+              telursusu.style.display = "none"
+            }
+            else if (item == 'telursusu') {
+              allItems.style.display = "none"
+              sayur.style.display = "none"
+              buah.style.display = "none"
+              dagingseafood.style.display = "none"
+              telursusu.style.display = "block"
+            }
+          }
+          
+          function getValue() {
+            let input = document.getElementById("myInput")
+            let value = input.value
+            console.log(value)
+            return(value)
+          }
+
+          let filter = document.querySelectorAll(".card-title")
+          document.getElementById("myInput").addEventListener("keydown", function(event) {
+            allItems.style.display = "block"
+            if (event.keyCode === 13) {
+              event.preventDefault()
+
+              filter.forEach(function(item) {
+                let text = item.textContent.toLowerCase()
+
+                if(text.includes(getValue())) {
+                  item.parentElement.parentElement.parentElement.parentElement.style.display = "grid"
+                } else {
+                  item.parentElement.parentElement.parentElement.parentElement.style.display = "none"
+                }
+              });
+            }
+          })
+        </script>
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content %}
+
