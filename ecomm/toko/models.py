@@ -134,3 +134,14 @@ class Payment(models.Model):
     
     class Meta:
         verbose_name_plural = 'Payment'
+
+class Contact(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=70, default="")
+    phone = models.CharField(max_length=70, default="")
+    desc = models.CharField(max_length=500, default="")
+
+
+    def __str__(self):
+        return self.name
