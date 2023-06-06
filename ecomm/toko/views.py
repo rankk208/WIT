@@ -20,7 +20,7 @@ class HomeListView(generic.ListView):
     queryset = ProdukItem.objects.all()
     # paginate_by = 25
 
-class ProductDetailView(generic.DetailView):
+class ProductDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'product_detail.html'
     queryset = ProdukItem.objects.all()
 
