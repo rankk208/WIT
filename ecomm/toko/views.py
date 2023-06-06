@@ -10,6 +10,10 @@ from paypal.standard.forms import PayPalPaymentsForm
 
 from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+from django.shortcuts import render,redirect
+from .forms import ContactForm
+from django.http import HttpResponse
+from .models import Contact
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
@@ -71,6 +75,37 @@ class CheckoutView(LoginRequiredMixin, generic.FormView):
         except ObjectDoesNotExist:
             messages.error(self.request, 'Tidak ada pesanan yang aktif')
             return redirect('toko:order-summary')
+
+#kontak view
+
+class ContactView(LoginRequiredMixin, generic.FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+            desc = form.cleaned_data.get('desc')
+
+            contact = Contact(name=name, email=email, phone=phone, desc=desc)
+            contact.save()
+
+            return redirect('toko:success')
+
+        return render(request, self.template_name, {'form': form})
+
+class SuccessView(generic.FormView):
+    def get(self, request):
+        return HttpResponse('Success!')
+
+#kontak view
 
 class PaymentView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):

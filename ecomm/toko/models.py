@@ -33,7 +33,7 @@ class ProdukItem(models.Model):
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
-
+    
     def __str__(self):
         return f"{self.nama_produk} - ${self.harga}"
 
@@ -92,7 +92,6 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
-
      
     def get_total_harga_order(self):
         total = 0
@@ -134,3 +133,14 @@ class Payment(models.Model):
     
     class Meta:
         verbose_name_plural = 'Payment'
+
+class Contact(models.Model):
+    # id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=70, default="")
+    phone = models.CharField(max_length=70, default="")
+    desc = models.CharField(max_length=500, default="")
+
+
+    def __str__(self):
+        return self.name
