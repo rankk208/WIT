@@ -115,6 +115,10 @@ class OrderSummaryView(LoginRequiredMixin, generic.TemplateView):
         except ObjectDoesNotExist:
             messages.error(self.request, 'Tidak ada pesanan yang aktif')
             return redirect('/')
+        
+def kontak_view(request):
+    template_name = "kontak.html"
+    return render(request, template_name)
 
 def add_to_cart(request, slug):
     if request.user.is_authenticated:
