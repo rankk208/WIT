@@ -28,3 +28,89 @@ color: #E53935
 .sale-badge {
 background-color: #E53935
 }
+
+/* Kontak CSS */
+#title-container {
+  padding-top: 2em;
+  padding-bottom: 3em;
+}
+
+#title {
+  color: #006E08;
+}
+
+#sub-title {
+  color: #909090;
+}
+
+#box {
+  background-color: #FFFFFF;
+  margin: 0 20% 10% 20%;
+}
+
+#box1 {
+  background-color: #13A699;
+  padding: 2em;
+  width: 40%;
+}
+
+.box1-text-color {
+  color: #FFF7ED;
+}
+
+.box1-text {
+  margin-bottom: 1em;
+  padding-right: 2em;
+}
+
+.non-title {
+  font-size: 0.8em;
+}
+
+.list-contact {
+  margin: 2em 0 1em 0;
+}
+
+.icon {
+  color: #FFD708;
+  padding-right: .8em;
+}
+
+#box2 {
+  padding-top: 1.5em;
+}
+
+.box2-text-color {
+  color: #13A699;
+}
+
+label {
+  font-size: 0.8em;
+}
+
+.form-container-kontak {
+  padding: 0em 2em 2em 3em;
+}
+
+.form-group-kontak {
+  padding-right: 5em;
+}
+
+.form-control-kontak {
+  color: #333;
+  background: #fff;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  height: 30px;
+  padding: 6px 6px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #e7e7e7;
+  box-shadow: none;
+  width: 100%;
+}
+
+.btn-kontak {
+  background-color: #FFD708;
+  width: 10em;
+}
