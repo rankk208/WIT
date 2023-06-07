@@ -68,7 +68,7 @@ class OrderProdukItem(models.Model):
         return self.quantity * self.produk_item.harga_diskon
 
     def get_total_hemat_item(self):
-        return self.get_total_harga_item() - self.get_total_harga_diskon_item()
+        return round(self.get_total_harga_item() - self.get_total_harga_diskon_item(), 2)
     
     def get_total_item_keseluruan(self):
         if self.produk_item.harga_diskon:
@@ -97,12 +97,14 @@ class Order(models.Model):
         total = 0
         for order_produk_item in self.produk_items.all():
             total += order_produk_item.get_total_item_keseluruan()
+            total = round(total, 2)
         return total
     
     def get_total_hemat_order(self):
         total = 0
         for order_produk_item in self.produk_items.all():
             total += order_produk_item.get_total_hemat_keseluruhan()
+            total = round(total, 2)
         return total
 
 class AlamatPengiriman(models.Model):

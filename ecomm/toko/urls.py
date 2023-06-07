@@ -11,6 +11,7 @@ urlpatterns = [
      path('success/', views.SuccessView.as_view(), name='success'),
      path('add-to-cart/<slug>/', views.add_to_cart, name='add-to-cart'),
      path('remove_from_cart/<slug>/', views.remove_from_cart, name='remove-from-cart'),
+     path('remove_item_from_cart/<slug>/', views.remove_single_item_from_cart, name='remove-single-item-from-cart'),
      path('order-summary/', views.OrderSummaryView.as_view(), name='order-summary'),
      path('payment/<payment_method>', views.PaymentView.as_view(), name='payment'),
      path('paypal-return/', views.paypal_return, name='paypal-return'),
